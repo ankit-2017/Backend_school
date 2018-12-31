@@ -1,0 +1,137 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <style>
+    .video-container {
+position: relative;
+padding-bottom: 56.25%;
+padding-top: 30px; height: 0; overflow: hidden;
+}
+
+.video-container iframe,
+.video-container object,
+.video-container embed {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+}
+    </style>
+
+    {% include 'model_new.html' %}
+
+<div class="linux">
+<h2>Django installation on linux distribution</h2>
+<h3><b>Install Django using pip</b></h3>
+    <p>
+        Python 2x and 3x both is pre-installed in linux distributions, to check version python 2.7 just type
+        <code>python</code> in terminal(open terminal by using <code>Ctrl + Alt + T</code>.
+        Now update system and install pip(python package manager) by using following command<br>
+    </p>
+    <p>For python 3x version</p>
+    <pre>
+<span style="color: darkred"><b>root@mypc:~$</b></span> sudo apt-get update
+<span style="color: darkred"><b>root@mypc:~$</b></span> sudo apt-get install python3-pip python3-dev</pre>
+    <p>For python 2x version</p>
+    <pre>
+<span style="color: darkred"><b>root@mypc:~$</b></span> sudo apt-get install python-pip python-dev</pre>
+
+            <h4><b>For python 3x versions</b> </h4><br>
+            <p>
+                Run the following command in your terminal.
+            </p>
+        <pre>
+<span style="color: darkred"><b>root@mypc:~$</b></span> sudo pip3 install django==1.9</pre><br>
+        <p>Specify which version of django you want to install.<br>
+            If you will not specify any version then it will automatically install the latest version of
+            Django.To install with latest version of django run following command in cmd.
+        </p><br>
+         <pre>
+<span style="color: darkred"><b>root@mypc:~$</b></span> sudo pip3 install django</pre><br>
+
+            <h4><b>For Python 2x version </b></h4>
+            <p>
+                Run the following command in cmd(terminal)
+            </p>
+            <pre>
+<span style="color: darkred"><b>root@mypc:~$</b></span> sudo pip install django==1.9
+                or
+<span style="color: darkred"><b>root@mypc:~$</b></span> sudo pip install django</pre>
+
+    <p>
+        After installing django check whether it is installed correctly or not!
+        Open <b>cmd</b> and type <b>python</b> then write following given command:<br>
+        <pre><span style="color: orangered" >
+import</span> django
+django.__version__
+'1.11.7'</pre><br>
+        If you will get the version of django then it is successfully installed on your system.
+    </p>
+    <h3><b>Create Project</b></h3><br>
+    <p>
+        To start django project,open command prompt(cmd), create a directory where you want to keep django project. Then change directory
+        to new created directory.then run following commands in cmd:
+        <pre>
+<span style="color: darkred"><b>root@PC:~\</b></span>pathToDirectory\myProject<span style="color: orangered">$</span> django-admin startproject myProject
+<span style="color: darkred"><b>root@PC:~\</b></span>pathToDirectory\myProject<span style="color: orangered">$</span> django-admin startapp polls
+
+<span style="color: darkred"><b>root@PC:~\</b></span>pathToDirectory\myProject<span style="color: orangered">$</span> python3 manage.py migrate</pre>
+        To run django server, must ensure you are in directory where manage.py file is present, then run
+    following command:
+        <pre>
+<span style="color: darkred"><b>root@PC:~\</b></span>pathToDirectory\myProject<span style="color: orangered">$</span> python3 manage.py runserver</pre>
+    Add app (polls) to installed apps in settings.py file which is present in project directory.
+    <pre>
+        settings.py
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'polls',
+]</pre>
+    Open any browser and enter following URL
+    <b>localhost:8000</b> <br>If following message display on your browser then you have done it.
+    </p>
+    {% load static %}
+    <img src="{% static 'image/django.png' %}" class="img-responsive"><br>
+    <p>
+    To access the admin panel of your website, you have to create account as superuser in command prompt,to
+        create account, stop the running django server using <code>ctrl + c</code>, then type following command:
+        <pre>
+<span style="color: darkred"><b>root@PC:~\</b></span>pathToDirectory\myProject<span style="color: orangered">$</span> python3 manage.py createsuperuser</pre>
+    Press enter then you have to enter your username, email and password.<br> Password should not be numeric
+    <br> Atleast 8 character long<br>
+    Should not match with username or email  <br>
+    <pre>
+Username ( leave blank to use 'name'): username
+Email address: youremail@example.com
+Password:
+Password (again):
+Superuser created successfully.</pre>
+After superuser created , open your browser and type<br>
+    <pre>
+localhost:8000/admin</pre>
+    {% load static %}
+    <img src="{% static 'image/admin.png' %}" class="img-responsive">
+    </p>
+<p>
+ Watch video on Django installation on linux
+</p>
+<div class="video-container">
+
+    <iframe width="660" height="400" src="https://www.youtube.com/embed/OLOW_mIsC8Y" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+</div>
+
+<br>
+
+
+<div class="g-ytsubscribe" data-channelid="UCj_kWMCT0WJ6YJGUcLbRtUQ" data-layout="full"  data-count="hidden"></div>
+</div><!--end of linux -->
+
+<br>
+
+{% endblock %}

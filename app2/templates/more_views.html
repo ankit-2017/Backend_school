@@ -1,0 +1,103 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+    {% include 'model_new.html' %}
+
+<h1>Submit form and display data on same page</h1>
+    <p>
+    Here we submit form and display submitted information on same page such that we acknowledge the
+    data to display it.
+    </p>
+    <p>
+In below code there are two different views <code>home and student1</code>, function home is used to
+        fetch data from model and transfer data to html page , function <code>student1</code> is used to
+    save the form data and after submission reload the page.
+    </p>
+    <p><code>views.py</code></p>
+    <pre>
+from django.shortcuts import render
+from .models import  *
+from .forms import *
+from django.http import *
+
+def home(request):
+    obj = student.objects.all().order_by('-dat')
+
+    return render(request, 'index.html', {'obj':obj})
+
+def student1(request):
+
+    if request.method == 'POST':
+        form = student_form(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/studentform/')
+
+    else:
+        form = student_form()
+    return render(request, 'student.html', {'form':form})</pre>
+<p>
+<code>urls.py</code>
+<pre>
+from django.conf.urls import url
+from django.contrib import admin
+from myapp.views import *
+
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    url(r'^studentform/$',student1),
+]</pre>
+</p>
+
+            {% if request.user.is_authenticated %}
+            <a href="/combine_views/combo1/">
+    <button type="button" class="btn btn-block">
+        <span class="glyphicon glyphicon-download-alt"></span>
+        Download project user</button>
+            </a>
+        {% else %}
+        <button type="button" class="btn btn-block mdl" data-toggle="modal" data-target="#myModal">
+        <span class="glyphicon glyphicon-download-alt"></span>
+        Download project- not user</button>
+
+        {% endif %}
+        <br>
+<p>
+Now combine two function in one by fetching data on in student1 function.
+<code>views.py</code>
+</p>
+    <pre>
+from django.shortcuts import render
+from .models import  *
+from .forms import *
+from django.http import *
+
+def student1(request):
+    obj = student.objects.all().order_by('-dat')
+    if request.method == 'POST':
+        form = student_form(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/studentform/')
+
+    else:
+        form = student_form()
+    return render(request, 'student.html', {'form':form, 'obj':obj})
+    </pre>
+    <p>
+    <code>student.html</code>
+    </p>
+    {% load static %}
+    <img src="{% static '/image/combo3.png' %}" class="img-responsive"><br>
+    <p>
+    Subscribe <b>Backend School</b> to watch more videos
+    </p>
+    <div class="video-container">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/TF4DUTnCjFw" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+    </div><br>
+        <div class="g-ytsubscribe" data-channelid="UCj_kWMCT0WJ6YJGUcLbRtUQ" data-layout="full"  data-count="hidden"></div>
+<br>
+    <br>
+
+{% endblock %}

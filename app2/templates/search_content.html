@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+<div id="search_result">
+
+        {% if stats %}
+            <ul style="padding: 0px;">
+        {% for k in stats %}
+            <li role="separator" class="divider">
+                <a href="/django/{{ k.url }}/">{{ k.title }}</a>
+            </li>
+
+        {% endfor %}
+            </ul>
+        {% else %}
+            <p style="color: red">No result found</p>
+
+        {% endif %}
+</div>
+</body>
+</html>

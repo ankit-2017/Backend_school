@@ -1,0 +1,118 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <style>
+
+
+    #not2 {
+        padding: 10px;
+    background-color: lightgrey;
+    color: brown;
+
+    border-radius: 5px;
+    margin-bottom: 20px;
+    }
+
+
+    </style>
+
+{% include 'model_new.html' %}
+<p class="view">
+<h2>Create our first view</h2>
+<p>
+    <code>views.py</code> is present in app directory which is the core part of project, it includes functions,
+    generate response back to server. it is the backend part of project.To create view you have to define the url
+    pattern and name of views that will associated with url.
+    Before define url with view you have import views in <code>urls.py</code> which is present in project directory
+<pre>
+from polls.views import *</pre>
+</p>
+    <p>
+The <code>urls.py</code> file would be look like as following<br>
+</p>
+<pre>
+from django.conf.urls import url
+from django.contrib import admin
+from myapp.views import *
+
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    url(r'^index/$', home)
+]</pre>
+    <p>
+    Now we are going to fetch data from student model, but before fetching data we have to add some records
+    in model, so add student information through admin panel<br>
+        <a href="/models/4/">learn how to add data in model</a><br>
+       After add information in model write following code in <code>views.py</code>
+    </p><br>
+    <pre id="pr" contenteditable="true">
+from django.shortcuts import render
+from .models import  *
+
+def home(request):
+    obj = student.objects.all().order_by('-dat')
+
+    return render(request, 'index.html', {'obj':obj})</pre>
+
+            {% if request.user.is_authenticated %}
+            <a href="/views/django_view/">
+    <button type="button" class="btn btn-block">
+        <span class="glyphicon glyphicon-download-alt"></span>
+        Download project user</button>
+            </a>
+        {% else %}
+        <button type="button" class="btn btn-block mdl" data-toggle="modal" data-target="#myModal">
+        <span class="glyphicon glyphicon-download-alt"></span>
+        Download project- not user</button>
+
+        {% endif %}
+
+
+<p>
+The above code will fetch all objects stored in student model according to their date.Here we are sorting the
+data in descending order <code>'-dat'</code>, it mean last added object will appear first then second one and
+so on..
+Try to use <b>dat</b> field without '-' sign, you will get the ascending order of records.
+</p>
+    <div id="not2">
+    <b>Note</b>:<br>
+        <ul>
+            <li>
+    The scripts writen in django are case sensitive so always consider the correct format and structure of
+    methods and properties.
+            </li>
+            <li>
+                For every function or class define in views.py (or in python file of app) , you have to define
+                <code>return</code>type, such that to generate response for corresponding request in function.
+            </li>
+        </ul>
+    </div>
+    Now create a template directory in polls app with name of<code>templates</code>(case sensitive)that will
+    contains all html files.So create a html file <code>index.html</code> in templates directory.
+    <pre>
+return render(request, 'index.html', {'obj':obj})</pre>
+    In the above line we have returned the object of student model as a key in dictionary
+    <code>'obj'</code> and the web page where the value will be display.
+    <p style="color: orangered"><b>index.html</b></p>
+    <br>
+    {% load static %}
+<img class="img-responsive" src="{% static '/image/index.png/' %}"><br>
+
+    <p>
+    Watch video for how to create views in django
+    </p>
+    <div class="video-container">
+    <iframe width="660" height="400" src="https://www.youtube.com/embed/mO6jNSjCsz0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+    </div>
+    <br>
+    <div class="g-ytsubscribe" data-channelid="UCj_kWMCT0WJ6YJGUcLbRtUQ" data-layout="full"  data-count="hidden"></div>
+    <br>
+
+
+</p>
+
+</div><!--end of view-->
+
+
+
+{% endblock %}

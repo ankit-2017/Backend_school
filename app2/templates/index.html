@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        Backend School
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
+    <script type="text/javascript" src="/static/js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css">
+    <script type="text/javascript" src="/static/js/index.js"></script>
+    <!-- for youtube suscribe button-->
+    <script src="https://apis.google.com/js/platform.js"></script>
+    <!-- library for header's google font-->
+    <link href="https://fonts.googleapis.com/css?family=Arsenal" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
+    <!--this is for icon-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.navbar-default .container-fluid .collapse .navbar-form .input-group .form-control {
+    background-color: #3c3c3c;
+    color: white;
+    width: 400px;
+    font-size: 18px;
+    font-family: 'Arsenal', sans-serif;
+    font-weight: lighter;
+    border: 0px;
+    opacity: 0.7;
+}
+.circle1 {
+    width: 30px;
+    height: 30px;
+
+}
+pre {
+    font-size: 13px;
+}
+
+@media screen and (max-width: 500px) {
+    .navbar-default .container-fluid .collapse .navbar-form .input-group .form-control{
+        width: 250px;
+        font-size: 13px;
+    }
+
+.cf {
+    overflow: hidden;
+}
+
+
+}
+
+</style>
+</head>
+<body>
+<div id="navid">
+<nav  class=" navbar navbar-default" style="border: 0px; border-radius: 0px">
+    <div class="container-fluid cf" >
+
+        <div class="navbar-header" >
+            <button type="button" data-target="#menu" data-toggle="collapse" class="navbar-toggle collapsed" aria-expanded="false">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div><!--end of navbar header section-->
+
+        <!--put all menu here-->
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="nav navbar-nav">
+                <li><a style="background: transparent" href="/introduction/67/"> BACKEND SCHOOL </a></li>
+            </ul>
+
+            <form class=" navbar-form navbar-left" method="post" action="">
+              {% csrf_token %}
+                <div class="input-group">
+
+                    <input  type="text" name="srch" id="searchtxt" class="form-control" placeholder="Search posts">
+                    <div id="drop"><br><br>
+                        <ul>
+                        {% include 'search_content.html' %}
+                        </ul>
+                    </div><!--end of drop id-->
+                </div>
+
+            </form><!--end of search form-->
+
+
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="#"> Tutorials </a></li>
+                <li><a href="#">Discussion</a> </li>
+                <li><a href="#">FAQ</a> </li>
+                    {% if request.user.is_authenticated %}
+                        <li style="margin-right: -15px; background-color: #350b60">
+                        <a href="#" role="button" style="font-size: 14px;">
+                            {{ request.user.get_full_name|title }}
+                        </a>
+                        </li>
+                    <li class="dropdown" style="background-color: #350b60" >
+                    {% load static %}
+                        <a   class="dropdown_toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <img style="margin-bottom: -10px" src="{% static '/image/user.png' %}" class="img-responsive img-circle circle1">
+
+                        </a>
+                        <ul class="dropdown-menu"  >
+                            <li><a style="color: black" href="#">View Profile</a></li>
+                            <li><a style="color: black" href="/logout/{{ murl }}/">Logout</a></li>
+                        </ul>
+
+                    </li>
+                    {% endif %}
+                {% if not request.user.is_authenticated %}
+                <li><a style="cursor: pointer" data-toggle="modal" data-target="#myModal">Login/Sign Up</a> </li>
+                {% endif %}
+            </ul>
+        </div><!--end of id menu-->
+    </div><!--end of container fluid-->
+</nav>
+</div><!--end of navid-->
+
+<div class="container-fluid main">
+<div id="welcome">
+    Feel Comfortable to code in Django
+</div>
+<div class="row rowclass">
+    <div class="col-lg-3 side1 ">
+
+<div style="cursor: pointer" id="frst_hidden">DJANGO TUTORIAL</div>
+        <ul class="side">
+            <li style="cursor: pointer" id="frst">DJANGO TUTORIAL</li>
+            <!--<li><a href="/introduction/"> Introduction</a></li>
+            <li><a href="/windows/window/"> Installation - Windows </a></li>
+            <li><a href="/linux/lin/">Installation - linux</a></li>
+            <li><a href="/models/models/"> Create model</a></li>
+            <li><a href="/views/view/"> Views</a></li>
+            <li><a href="/forms/frm/">Forms in django</a> </li>
+            <li><a href="/bootstrap_in_django/45/">Bootstrap integration</a> </li>
+            <li><a href="/combine_views/43/">More practice on views</a> </li>-->
+            {% for dj in com %}
+                <li><a href="/django/{{ dj.url }}/"> {{ dj.name }} </a></li>
+
+            {% endfor %}
+            <li><a href="#">User registration</a> </li>
+            <li><a href="#">Message class</a> </li>
+            <li><a href="#">User login module</a> </li>
+            <li><a href="#">Form validation</a> </li>
+            <li> <a href="#">Searching</a> </li>
+
+        </ul>
+    </div><!--end of col-lg-4-->
+<div class="col-lg-6 col-sm-6">
+
+    {% block content %}
+
+
+
+
+
+
+
+
+
+
+    {% endblock %}
+</div><!--end of col-lg-6-->
+
+
+</div><!--end of row-->
+
+
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-sm-4 bc">
+                    &copy;BACKEND SCHOOL
+                </div>
+                <div class="col-lg-4 col-sm-4">
+                    <i class="fa fa-youtube-play"></i>/<span>BACKEND SCHOOL</span>
+                </div>
+                <div class="col-lg-4 col-sm-4">
+                    <p>Subscribe to Backend School</p>
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        <div class="input-group">
+                        <input type="email" name="em" class="form-control" placeholder="Enter your email">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-primary">GO!</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end of container section-->
+</div><!--end of container fluid main -->
+<script>
+
+$(document).ready(function() {
+
+    $('#searchtxt').keyup(function() {
+
+        $.ajax({
+            type: "GET",
+            url: "/search_post/",
+            data: {
+                'srch' : $('#searchtxt').val(),
+                'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()
+            },
+            success: searchSuccess
+
+        });
+    });
+});
+
+function searchSuccess(data, textStatus, jqXHR) {
+
+    $('#search_result').html(data);
+
+    $('#searchtxt').keyup(function () {
+        var srh = $('#searchtxt').val();
+        if (srh == "") {
+            $('#drop').hide('fast');
+
+        }
+        else {
+            $('#drop').show('fast');
+
+        }
+    });
+
+    /* to close dropdown window when click anywhere */
+    $('body').not("#drop").click( function () {
+   $('#drop').hide('fast');
+            });
+}
+
+$(function () {
+   var offsetval = 40;
+   $(window).scroll(function () {
+        if ($(window).scrollTop() > offsetval){
+            $('#navid').css({
+                'position':'fixed',
+                'top':'0px',
+                'width':'100%',
+                'z-index':'2'
+            });
+
+
+            $(".side").css({
+                'position':'fixed',
+                'top':'auto',
+                'height':'470',
+                'width':'22%',
+                'z-index':'1'
+            });
+
+        }
+        else {
+            $('#navid').css({
+                'position':'static'
+            });
+
+            $(".side").css({
+                'position':'fixed',
+                'top':'auto',
+                'height':'500',
+                'width':'22%',
+                'z-index':'1'
+            });
+
+        }
+   });
+});
+
+if ($(window).width()<500){
+    $(".side").hide('fast');
+    $('#frst_hidden').click(function () {
+       $(".side").toggle('fast');
+    });
+
+
+$(function () {
+   var offsetval = 60;
+   $(window).scroll(function () {
+        if ($(window).scrollTop() > offsetval){
+
+            $('#navid').css({
+                'position':'fixed',
+                'top':'0px',
+                'width':'100%',
+                'z-index':'2'
+            });
+            $('#navid').show('slow', 'linear');
+
+
+            $(".side").css({
+                'position':'static',
+                'top':'auto',
+                'width':'100%',
+                'z-index':'1'
+            });
+
+        }
+        else {
+            $('#navid').css({
+                'position':'static'
+            });
+
+
+            $(".side").css({
+                'position':'static',
+                'top':'auto',
+                'width':'100%',
+                'z-index':'1'
+            });
+
+        }
+   });
+});
+
+
+
+
+}
+else {
+    $('.side li a').css({
+        'display':'block'
+    });
+}
+
+</script>
+
+
+</body>
+</html>

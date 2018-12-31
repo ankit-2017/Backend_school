@@ -1,0 +1,141 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<style>
+#mod  {
+    padding: 10px;
+    background-color: lightgrey;
+    color: #122b40;
+    border-radius: 5px;
+    margin-bottom: 20px;
+
+}
+
+</style>
+
+
+{% include 'model_new.html' %}
+
+
+    <div class="model-django">
+
+    <h2>Create models(database) in django</h2>
+    <p>
+        The <code>models.py</code> file is present in your app directory in which we shall create our models.
+
+       <br> models.py
+    </p>
+    <pre>
+from django.db import models
+
+
+class student(models.Model):
+    name = models.CharField(max_length=50)
+    emailid = models.EmailField(max_length=50)
+    city = models.CharField(max_length=100, blank= True, null=True)
+    marks = models.IntegerField(default=0, blank=True, null=True)
+    dat = models.DateTimeField(auto_now=True)
+
+    def __str__(self):   #__unicode__(self):
+        return self.name</pre>
+
+
+        {% if request.user.is_authenticated %}
+            <a href="/models/model/">
+    <button type="button" class="btn btn-block">
+        <span class="glyphicon glyphicon-download-alt"></span>
+        Download project user</button>
+            </a>
+        {% else %}
+        <button type="button" class="btn btn-block mdl" data-toggle="modal" data-target="#myModal">
+        <span class="glyphicon glyphicon-download-alt"></span>
+        Download project- not user</button>
+
+        {% endif %}
+
+
+        <br>
+        <p>
+            In the above code we have created a <b>student</b> model which consist of five fields 'name',
+            'eamilid','city','marks' and 'dat'.
+    <ul>
+        <li>The datatype of <b>name</b> is CharField which store only string.</li>
+        <li><b>emailid</b> field will store Email address in correct email format.</li>
+        <li>The datatype of <b>city</b> is Charfield which allow to store only string values,here <code>blank=True, null=True</code>
+            determine that if the field is blank or contain no value then form will be submit and django will not throw
+            any error or exception.
+        </li>
+        <li>The datatype of <b>marks</b> is IntegerField which store only integer value.</li>
+        <li>The <b>dat</b> field will store value in DateTime format automatically because we pass <code>auto_now=True</code></li>
+    </ul>
+        </p>
+<div id="mod">
+    <p>
+    Note:<br>
+        <ul>
+<li>
+    While you pass the parameter <code>auto_now</code> in <b>DateTimeField</b> then the 'dat' field is not
+    visible in model but you can fetch the time in any web page. The <code>auto_now</code> automatically store
+    the current server's date and time in specified field.
+</li>
+        </ul>
+    </p>
+</div>
+    <p>
+        For python 3x version use <code>__str__(self)</code>, this is the function that return the field
+        value to the model.<br>
+        For python 2.7.x version use <code>__unicode__(self)</code>
+
+    </p>
+    <p>
+        After writing the model you have to create it by apply migration on models.For creating models
+        open cmd or terminal, change your directory to project directory where manage.py file is kept,then type
+        following code:
+    </p>
+    <pre>
+manage.py migrate
+manage.py makemigrations
+    </pre>
+    <div id="mod">
+        Note:<br>
+        <ul>
+            <li>
+        While apply any change in model , you have to run above two commands each time to activate these
+        changes in model.
+            </li>
+        </ul>
+    </div>
+    <p>
+    Now you have to register your model( ex.-student) in <code>admin.py</code> file which is present in app
+        directory.Open the file and write following code:
+    </p>
+    <pre>
+from django.contrib import admin
+
+from .models import *
+
+admin.site.register(student)
+    </pre>
+    <p>
+        Now to access the student model and store values through <b>admin panel</b> , open browser and type
+        <code>localhost:8000/admin</code>, then enter your superuser username and password,After enter in admin
+        panel your browser screen will look like following:<br>
+        {% load static %}
+        <img src="{% static 'image/admin1.png' %}" class="img-responsive"><br>
+        Click on student model and add some records by click on <code>+Add Student</code><br>
+        {% load static %}
+        <img src="{% static 'image/student.png' %}" class="img-responsive"><br>
+
+    </p><br>
+        <p>
+            Subscribe <b>Backend School</b> to watch more videos
+        </p>
+    <div class="video-container">
+        <iframe width="660" height="400" src="https://www.youtube.com/embed/ZnjBPCUTXwU" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+    </div><br>
+        <div class="g-ytsubscribe" data-channelid="UCj_kWMCT0WJ6YJGUcLbRtUQ" data-layout="full"  data-count="hidden"></div>
+<br><br>
+
+    </div><!--end of model-django-->
+
+{% endblock %}

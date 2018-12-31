@@ -1,0 +1,315 @@
+
+
+.navbar-default {
+    background-color: #1b6d85 ;
+     padding: 0px;
+    margin: 0px;
+
+}
+.navbar-default .container-fluid {
+    padding: 0px;
+    margin: 0px;
+}
+.navbar-default .collapse ul li a {
+    color:white;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 20px;
+
+}
+.navbar-default .collapse ul li a:hover{
+
+    color: darkorange;
+
+}
+
+/*
+css for search dropdown
+ */
+.navbar-collapse form .input-group #drop {
+    width: 400px;
+    position: absolute;
+    z-index: 2;
+    color: midnightblue;
+    background-color: #dae2ef;
+    display: none;
+    border-radius: 5px;
+    padding: 10px;
+}
+@media screen and (max-width: 500px)
+{
+   .navbar-collapse form .input-group #drop {
+       width: 100%;
+   }
+    .navbar-collapse form .input-group #drop ul li a {
+        font-size: 13px;
+    }
+    #menu ul, form  {
+        padding-left: 10px;
+        margin-left: 10px;
+    }
+
+}
+/*
+this is for custom dropdown
+ */
+#drop ul li a:hover{
+    background: transparent;
+    color: #761c19;
+}
+#drop ul li {
+    list-style: none;
+}
+
+
+#drop ul li a{
+    color: #122b40;
+    text-decoration: none;
+    font-size: 16px;
+}
+/* end here */
+
+.main {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 18px;
+    padding: 0px;
+    margin: 0px;
+}
+
+/*
+
+ */
+#welcome {
+    background-color: darkgreen;
+    padding:10px 0px 10px 0px;
+    text-align: center;
+    font-size: 30px;
+    color: white;
+    margin: 0px 0px 10px 0px;
+
+}
+/*
+for hidden button
+ */
+#frst_hidden {
+    display: none;
+}
+/*
+for row class
+ */
+@media screen and (max-width: 500px)
+{
+    .rowclass {
+        padding: 0px;
+        margin: 0px;
+        font-size: 14px;
+    }
+    #welcome {
+        font-size: 20px;
+    }
+}
+
+
+.side {
+    box-shadow: 4px 4px 5px #c6c9ce;
+}
+.side {
+    height: 500px;
+    width: 22%;
+    position: fixed;
+    top: auto;
+    z-index: 1;
+    overflow-x: hidden ;
+}
+
+.container-fluid .row .col-lg-3 ul li {
+    list-style: none;
+
+}
+.container-fluid .row .col-lg-3 ul li a {
+    font-size: 19px;
+    text-decoration: none;
+    color: #013f36;
+
+}
+.container-fluid .row .col-lg-3 ul li:hover {
+    background-color: lightgrey;
+    color:white;
+}
+#frst{
+    background-color: seagreen;
+    color: white;
+    font-size: 22px;
+    margin-left: -30px;
+    text-align: center;
+    border-radius: 3px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+/* style sheet of introduction page */
+
+.intro h3 {
+    font-size: 30px;
+    font-weight: bold;
+}
+.intro p {
+    font-size: 18px;
+    line-height: 1.5;
+}
+.intro ul li {
+    margin-top: 30px;
+    list-style-type: none;
+    border-left: 15px solid seagreen;
+    padding-left: 5px;
+}
+
+pre {
+    font-size: 17px;
+}
+@media screen and (max-width:500px)
+{
+    .intro h3 {
+        font-size: 22px;
+
+    }
+    .intro p {
+        font-size: 17px;
+        line-height: 1.2;
+    }
+    #frst{
+
+        font-size: 20px;
+    }
+    pre {
+        font-size: 14px;
+    }
+    pre b{
+        padding: 0px;
+        margin: 0px;
+    }
+    .container-fluid .row .col-lg-3 ul {
+        position: relative;
+        width: 100%;
+
+    }
+#frst_hidden {
+    display: inline-block;
+   background-color: seagreen;
+    color: white;
+    width: 100%;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 3px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+/*
+hide original button
+ */
+    #frst {
+        display: none;
+    }
+
+
+
+
+}
+
+/*
+for footer section
+ */
+#footer {
+    width: 100%;
+    background-color: #013f36;
+    color: white;
+}
+#footer .container .row .bc {
+    font-size: 25px;
+    vertical-align: middle;
+}
+#footer .container .row .fa-youtube-play {
+    font-size: 50px;
+    color: darkred;
+    vertical-align: middle;
+}
+#footer .container .row {
+    padding: 10px;
+}
+
+
+/*
+for window-install css
+ */
+
+.window ul li {
+    font-size: 18px;
+    list-style: none;
+}
+.window ul li a
+{
+    text-decoration: none;
+}
+.window ul li a{
+    color: #761c19;
+
+}
+.window ul li a:hover
+{
+    color: #013f36;
+}
+.window ol li div img {
+    height: auto;
+    width: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+/*
+for youtube responsive
+ */
+.video-container {
+position: relative;
+padding-bottom: 56.25%;
+padding-top: 30px; height: 0; overflow: hidden;
+}
+
+.video-container iframe,
+.video-container object,
+.video-container embed {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+}
+
+/*
+for download btn-block css
+ */
+.btn-block {
+        background-color: #013f36;
+        color: white ;
+        font-size: 20px;
+
+    }
+    .btn-block:hover {
+        background-color: #122b40;
+        color: white;
+
+        font-size: 20px;
+    }
+
+
+/*
+for note section in all html pages
+ */
+#not2 {
+        padding: 10px;
+    background-color: lightgrey;
+    color: brown;
+
+    border-radius: 5px;
+    margin-bottom: 20px;
+    }
+
+
+

@@ -1,0 +1,132 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <style>
+    a .btn-md {
+        background-color: deeppink;
+        color: white;
+    }
+    a .btn-md:hover{
+        background-color: #013f36;
+        color: white;
+    }
+    .col-md-6 {
+        padding: 10px;
+        border-radius: 5px;
+    }
+    </style>
+
+    {% include 'model_new.html' %}
+
+<h2>How to integrate bootstrap in Django</h2>
+    <p>
+    There are two ways to use bootstrap in web page
+    </p>
+    <div class="row" style="margin-bottom: 10px;">
+    <div class="col-md-6" style="border: 1px solid darkslateblue;">
+        <b>Bootstrap CDN (Content Delivery Network)</b>
+        CDN contains all bootstrap libraries online, to access these libraries you will need an internet
+        connection while accessing for first time, then browser stores all libraries in cache memory and
+        libraries could be accessed offline.Add CDN in the head section of HTML page.<br><br>
+        <center>
+        <a href="http://getbootstrap.com/docs/3.3/getting-started/#download" target="_blank" style="text-decoration: none">
+        <button type="button" class="btn btn-md">Download Bootstrap CDN</button>
+        </a>
+        </center>
+    </div>
+    <div class="col-md-6" style="border: 1px solid darkslateblue; border-left: none">
+        Download Bootstrap library , extract downloaded folder , you will get <b>css, js and icon</b> folder
+        ,select minimised libraries like <code>bootstrap.min.css</code>. for javascript file select
+        <code>bootstrap.min.js</code>. These libraries are compressed version that reduces white spaces,
+        comments etc. from code so these are fast to load.<br><br>
+<center>
+        <a href="http://getbootstrap.com/docs/3.3/getting-started/#download" target="_blank" style="text-decoration: none">
+        <button type="button" class="btn btn-md">Download Source Code</button>
+        </a>
+</center>
+    </div><br><br>
+    </div>
+    <p>This is <code>forms.py</code> with bootstrap class</p>
+    <pre>
+from django import forms
+from .models import *
+
+class student_form(forms.ModelForm):
+    name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control',
+        'placeholder':'Enter your name'}),required=True, max_length=100)
+
+    emailid = forms.CharField(widget=forms.EmailInput(attrs={'class':'form-control',
+        'placeholder':'Enter your Email'}),required=True, max_length=100)
+
+    city = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control',
+        'placeholder':'Enter your city'}), required=False, max_length=100)
+
+    marks = forms.CharField(widget=forms.NumberInput(attrs={'class':'form-control',
+        'placeholder':'Enter your marks'}), required=True, max_length=10)
+
+    class Meta():
+        model = student
+        fields = ['name','emailid','city','marks']
+    </pre><br>
+
+
+            {% if request.user.is_authenticated %}
+            <a href="/bootstrap_in_django/bootstrap/">
+    <button type="button" class="btn btn-block">
+        <span class="glyphicon glyphicon-download-alt"></span>
+        Download project user</button>
+            </a>
+        {% else %}
+        <button type="button" class="btn btn-block mdl" data-toggle="modal" data-target="#myModal">
+        <span class="glyphicon glyphicon-download-alt"></span>
+        Download project- not user</button>
+
+        {% endif %}
+
+
+    <p>
+        In previous tutorial , we submitted form using <code>form1.as_p</code> method in <code>student.html</code> ,
+        now integrate bootstrap in our form to give a beautiful look and feel.<br>
+    Here is the <code>student.html</code> with bootstrap.<br>
+        {% load static %}
+    <img src="{% static '/image/form.png' %}" class="img-responsive">
+    </p>
+    <div id="not2">
+    <p>
+        <b>Note:</b><br>
+        <ul>
+        <li>
+            To use bootstrap source code offline , create a <code><b>static</b></code> directory in
+            app (i.e myapp) , inside static directory create <code>css, js</code> directory  and put all
+            css and javascript files in these directories respectively. To use javascript library, add
+            <b>jquery</b> library at top of the head section.<br>
+            <a href="#" target="_blank">
+                <button type="button" class=" btn btn-md ">Download Jquery</button>
+            </a>
+        </li>
+    </ul>
+    </p>
+    </div>
+    <p>Link bootstrap source code in head section of HTML page </p>
+    {% load static %}
+    <img src="{% static '/image/lib.png' %}" class="img-responsive"><br>
+    <p>
+    The <code>meta tag</code> is used to scale width of form according to screen size of device.It
+    is used to make web page responsive.
+    </p>
+
+    <p>
+    Subscribe <b>Backend School</b> to watch more videos
+    </p>
+    <div class="video-container">
+    <iframe width="660" height="400" src="https://www.youtube.com/embed/lsds9sv2Gkc" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+    </div><br>
+        <div class="g-ytsubscribe" data-channelid="UCj_kWMCT0WJ6YJGUcLbRtUQ" data-layout="full"  data-count="hidden"></div>
+
+    <br>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,156 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+    {% include 'model_new.html' %}
+
+<h2>Submit Data using Django forms</h2>
+    <p>
+    You have to create <code>forms.py</code> file in app( myapp) directory, because forms.py file didn't
+    automatically created while starting app.so you have to create it first, then import models from
+    <code>models.py</code> file to use all models in forms .Here we are using <code>ModelForm</code>, which
+    is inbuilt class in django.<br>
+    This is the <code><b>forms.py</b></code> file:
+    </p>
+
+    <pre>
+from django import forms
+from .models*
+
+
+class student_form(forms.ModelForm):
+    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Enter name'}),
+        required=True, max_length=100)
+
+    emailid = forms.CharField(widget=forms.EmailInput(attrs={'placeholder':'Enter Email'}),
+        required=True, max_length=100)
+
+    city = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Enter city'}),
+        required=False, max_length=100)
+    marks = forms.CharField(widget=forms.NumberInput(attrs={'placeholder':'Enter marks'}),
+        required=True, max_length=10)
+
+    class Meta():
+        model = student
+        fields = ['name','emailid','city','marks']
+    </pre>
+
+
+            {% if request.user.is_authenticated %}
+            <a href="/forms/download_form/">
+    <button type="button" class="btn btn-block">
+        <span class="glyphicon glyphicon-download-alt"></span>
+        Download project user</button>
+            </a>
+        {% else %}
+        <button type="button" class="btn btn-block mdl" data-toggle="modal" data-target="#myModal">
+        <span class="glyphicon glyphicon-download-alt"></span>
+        Download project- not user</button>
+
+        {% endif %}
+    <p>
+    In the above code , initially import forms and all models such that we could use them in our form.
+    create a class <code>student_form</code> and pass <b>Forms.ModelForm</b> as parameter.Then define respective
+    fields as declare in <code>models.py</code>, so in the <b>name</b> form will accept characters and define
+    widget in the form similar to HTML input tags. Here we want 'name' as text field so apply <code>
+        <b>forms.TextInput</b>
+    </code>.In this input type define the various <code><b>attributes</b></code> such as BOOTSTRAP input class
+    <code>form-control</code> and 'placeholder', you can define any bootstrap and HTML tags in <b>attrs</b>.
+    </p>
+    <p>
+    Out of widget , there is some django attributes such as <code><b>required and max_lenght</b></code>, that
+        can be use to validate the input data. <b>required</b> means if user will try to submit blank field
+    then form will not submit, while using required the field should not be blank.
+    </p>
+    <p>
+    Finally we have to mention which model is going to used while submission of form and what will be the
+    fields in which data will store.
+    </p>
+    <p>
+    <code><b>urls.py</b></code>
+    </p>
+    <pre>
+from django.conf.urls import url
+from django.contrib import admin
+from myapp.views import *
+
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    url(r'^index/$', home),
+    url(r'^studentform/$',student1),
+    ]</pre>
+    <p>
+    At url <b>studentform/</b> server map student1 view in views.py file.
+    </p>
+    <p>Now coming to <code><b>views.py</b></code>file
+    </p>
+    <pre>
+from django.shortcuts import render
+from .models import  *
+from .forms import *
+from django.http import *
+
+def student1(request):
+
+    if request.method == 'POST':
+        form1 = student_form(request.POST)
+        if form1.is_valid():
+            form1.save()
+            return HttpResponseRedirect('/studentform/')
+
+    else:
+        form1 = student_form()
+    return render(request, 'student.html', {'form':form1})</pre>
+
+    <p>
+    Initially we are checking the form method, if it is <b>POST</b> then create a object of student_form, that
+        we have created in <code>forms.py</code> file and pass all input data to student_form.If object form1
+    is valid (django inbuilt method to check form such that it should validate on define attribute), then save
+    form1.After submission of form server will redirect to <b>/studentform/</b> url that is the url of same
+    page , you can pass any url to redirect on another page.
+    </p>
+    <p>
+        If request method is not <b>POST</b> then open a blank form that is form1.After that we have to pass
+    response to server, so return the HTML page where form will display and also return key of form1 object
+    such that we could use django form in html form.
+    </p>
+    <p>
+    you can assign any key to form object or any object.
+    </p>
+    <br>
+    <code><b>student.html</b></code><br>
+    {% load static %}
+    <img src="{% static '/image/form_as_p1.png' %}" class="img-responsive">
+    <br>
+    <p>
+        The meaning of <b>.as_p</b> is display form as paragraph format.there are <b>as_table and as_ul</b>
+    method to display form in tabular format and unorder list respectively.
+
+    </p>
+    <div id="not2">
+    <p>
+        <b>Note:</b> <br>
+        <ul>
+        <li>
+            Don't forget to define <b>csrf_token</b> in starting of form. if you will not define it then
+            form will not submit.
+            <b>csrf_token</b> prevent form data from online attacks or malware injections in database.<br>
+            <a href="https://en.wikipedia.org/wiki/Cross-site_request_forgery" target="_blank">learn more about csrf token </a>
+        </li>
+    </ul>
+    </p>
+    </div><!--end of not2 id--><br>
+    <p>
+    Subscribe <b>Backend School</b> to watch more videos
+    </p>
+    <div class="video-container">
+    <iframe width="660" height="400" src="https://www.youtube.com/embed/bbh7XJ6QrFo" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+    </div><br>
+        <div class="g-ytsubscribe" data-channelid="UCj_kWMCT0WJ6YJGUcLbRtUQ" data-layout="full"  data-count="hidden"></div>
+<br>
+
+    <br>
+
+
+
+{% endblock %}
